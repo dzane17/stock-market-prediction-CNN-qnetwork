@@ -1,1 +1,1 @@
-# stock-market-prediction-CNN-qnetwork
+# DQN-global-stock-market-prediction
