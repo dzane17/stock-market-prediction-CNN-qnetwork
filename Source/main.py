@@ -53,14 +53,18 @@ for i in range ( 0, len( folderlist) ):
     YData           =   DRead.readRaw_generate_Y( filepathY, len(XData), len(XData[0]) )   
 
     Model.set_Data                          ( XData, YData )
+    print()
     Model.Test_Neutralized_Portfolio        ( sess, saver, state, isTrain, rho_eta, W, W, NumAction )
-    Model.Test_TopBottomK_Portfolio         ( sess, saver, state, isTrain, rho_eta, W, W, NumAction,  0.2 )
+    print()
+    for i in range(1,15):
+        print(f'\nK = {i}/14')
+        Model.Test_TopBottomK_Portfolio         ( sess, saver, state, isTrain, rho_eta, W, W, NumAction,  i/14 )
 
 ###################################
 
 ########## Train Model ############
 
-"""
+'''
 # folder path for training
 filepathX       =   '../Sample_Training/WH32_32_2017_2018/inputX.txt'
 filepathY       =   '../Sample_Training/WH32_32_2017_2018/inputY.txt'
@@ -69,7 +73,7 @@ XData           = DRead.readRaw_generate_X( filepathX, W, W )                   
 YData           = DRead.readRaw_generate_Y( filepathY, len(XData), len(XData[0]) )  # L_c^t  
 Model.set_Data      ( XData, YData)
 Model.trainModel    ( W,W, FSize, PSize, PStride, NumAction, M, Gamma )
-"""
+'''
 ####################################
 
 
