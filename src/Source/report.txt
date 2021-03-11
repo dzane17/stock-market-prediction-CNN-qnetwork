@@ -1,0 +1,97 @@
+TensorFlow 2.0 Upgrade Script
+-----------------------------
+Converted 5 files
+Detected 7 issues that require attention
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+File: ./convNN.py
+--------------------------------------------------------------------------------
+./convNN.py:34:22: ERROR: Using member tf.contrib.layers.flatten in deprecated module tf.contrib. tf.contrib.layers.flatten cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+./convNN.py:81:14: ERROR: Using member tf.contrib.layers.batch_norm in deprecated module tf.contrib. tf.contrib.layers.batch_norm cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+./convNN.py:88:18: ERROR: Using member tf.contrib.layers.batch_norm   in deprecated module tf.contrib. tf.contrib.layers.batch_norm   cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+./convNN.py:94:18: ERROR: Using member tf.contrib.layers.batch_norm   in deprecated module tf.contrib. tf.contrib.layers.batch_norm   cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+--------------------------------------------------------------------------------
+File: ./train.py
+--------------------------------------------------------------------------------
+./train.py:65:8: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+./train.py:123:20: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+./train.py:139:16: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+================================================================================
+Detailed log follows:
+
+================================================================================
+================================================================================
+Input tree: './'
+================================================================================
+--------------------------------------------------------------------------------
+Processing file './convNN.py'
+ outputting to './convNN.py'
+--------------------------------------------------------------------------------
+
+25:22: INFO: Added keywords to args of function 'tf.nn.moments'
+34:22: ERROR: Using member tf.contrib.layers.flatten in deprecated module tf.contrib. tf.contrib.layers.flatten cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+40:35: INFO: Added keywords to args of function 'tf.argmax'
+51:22: INFO: Renamed 'tf.get_collection' to 'tf.compat.v1.get_collection'
+51:42: INFO: Renamed 'tf.GraphKeys' to 'tf.compat.v1.GraphKeys'
+52:22: INFO: Renamed 'tf.trainable_variables' to 'tf.compat.v1.trainable_variables'
+56:22: INFO: Added keywords to args of function 'tf.reduce_sum'
+57:22: INFO: Renamed 'tf.train.AdamOptimizer' to 'tf.compat.v1.train.AdamOptimizer'
+68:73: INFO: Changing tf.contrib.layers xavier initializer to a tf.compat.v1.keras.initializers.VarianceScaling and converting arguments.
+
+69:56: INFO: Renamed 'tf.truncated_normal' to 'tf.random.truncated_normal'
+77:73: INFO: Changing tf.contrib.layers xavier initializer to a tf.compat.v1.keras.initializers.VarianceScaling and converting arguments.
+
+78:56: INFO: Renamed 'tf.truncated_normal' to 'tf.random.truncated_normal'
+81:14: ERROR: Using member tf.contrib.layers.batch_norm in deprecated module tf.contrib. tf.contrib.layers.batch_norm cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+88:18: ERROR: Using member tf.contrib.layers.batch_norm   in deprecated module tf.contrib. tf.contrib.layers.batch_norm   cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+94:18: ERROR: Using member tf.contrib.layers.batch_norm   in deprecated module tf.contrib. tf.contrib.layers.batch_norm   cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+99:26: INFO: Added keywords to args of function 'tf.nn.moments'
+100:26: INFO: Added keywords to args of function 'tf.nn.max_pool'
+100:26: INFO: Renamed keyword argument for tf.nn.max_pool from value to input
+100:26: INFO: Renamed 'tf.nn.max_pool' to 'tf.nn.max_pool2d'
+107:79: INFO: Changing tf.contrib.layers xavier initializer to a tf.compat.v1.keras.initializers.VarianceScaling and converting arguments.
+
+108:14: INFO: Added keywords to args of function 'tf.nn.conv2d'
+108:14: INFO: Renamed keyword argument for tf.nn.conv2d from filter to filters
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Processing file './exReplay.py'
+ outputting to './exReplay.py'
+--------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Processing file './train.py'
+ outputting to './train.py'
+--------------------------------------------------------------------------------
+
+57:22: INFO: Renamed 'tf.Session' to 'tf.compat.v1.Session'
+58:22: INFO: Renamed 'tf.Session' to 'tf.compat.v1.Session'
+59:19: INFO: Renamed 'tf.global_variables_initializer' to 'tf.compat.v1.global_variables_initializer'
+62:22: INFO: Renamed 'tf.train.Saver' to 'tf.compat.v1.train.Saver'
+65:8: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+123:20: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+139:16: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+266:22: INFO: Renamed 'tf.Session' to 'tf.compat.v1.Session'
+267:22: INFO: Renamed 'tf.train.Saver' to 'tf.compat.v1.train.Saver'
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Processing file './main.py'
+ outputting to './main.py'
+--------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Processing file './DataPPRL.py'
+ outputting to './DataPPRL.py'
+--------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+
