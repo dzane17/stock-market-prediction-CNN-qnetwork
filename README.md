@@ -1,6 +1,6 @@
 # Predicting the Stock Market Using Deep Q-Networks
 
-### Comp_Sci 396/496, Winter 2021
+### Comp_Sci 396/496 Winter 2021, Prof. Han Liu, Northwestern University
 ### By David Zane and Joshua Zhao
 
 
