@@ -7,6 +7,9 @@
 - Based on the Paper: [Global Stock Market Prediction Based on Stock Chart Images Using Deep Q-Network](https://arxiv.org/abs/1902.10948)
 - Authors: Jinho Lee, Raehyun Kim, Yookyung Koh, and Jaewoo Kang
 
+
+- Data that we used to train model in this repository is not uploaded due to licensing. 
+
 <!---
 ```python
 function test() { 
