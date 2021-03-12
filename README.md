@@ -10,7 +10,7 @@
 
 
 - Data that we used to train model in this repository is not uploaded due to licensing. 
-- VIDEO PRESENTATION LINK: [YouTube](https://youtu.be/y8xpKbOSDaY)
+- VIDEO PRESENTATION LINK: [YouTube](https://youtu.be/qd9x1VhY9mo)
 
 <!---
 ```python
