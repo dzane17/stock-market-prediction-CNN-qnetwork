@@ -5,6 +5,7 @@
 
 
 - Based on the Paper: [Global Stock Market Prediction Based on Stock Chart Images Using Deep Q-Network](https://arxiv.org/abs/1902.10948)
+- Original GitHub Repository: [DQN-global-stock-market-prediction](https://github.com/lee-jinho/DQN-global-stock-market-prediction)
 - Authors: Jinho Lee, Raehyun Kim, Yookyung Koh, and Jaewoo Kang
 
 
@@ -180,4 +181,81 @@ with open('inputY_test.txt', 'w') as outfile:
 
 Similar to Input X data, we combined all companies into the same text documents. For the Input Y data, 50 companies were in the text document for the training data and 14 companies were in the text document for the testing document.
 
+
+
+## Model
+
+We based our model on the [GitHub repository](https://github.com/lee-jinho/DQN-global-stock-market-prediction) provided in the original paper. Our main changes include converting from Python 2 to Python 3, updating TensorFlow version, and creating custom testing/experiment scripts.
+
+The original repository was built on TensorFlow v1.2.0. We converted all scripts, functions, and layers to the latest release TensorFlow v2.4.1. This was required for running on Python 3 and in order to make use of the best available resources.
+
+#### CNN
+The input to the CNN model is a 32x32 array which represents the normalized price and volume graph of the stock over the previous 32 days. Output of the CNN is two vectors of length 3. The first vector represented by the letter rho is the action values for each action long, neutral, and short. The second vector is all 0’s except one element set to ‘1’ at the index of the maximum element in vector rho.
+
+The diagram below shows the architecture and inputs of the CNN model. There are four hidden convolutional layers followed by two dense layers. Each convolution is followed by a ReLU and max pooling after the 2nd and 4th conv layers.
+
+<img src="https://github.com/dzane17/stock-market-prediction-CNN-qnetwork/blob/main/src/Images_Readme/cnn_architecture.PNG" width="400" height="400">
+
+#### Deep Q-Network
+Since the input state to the q-learning algorithm is complex (graphical image), we use the CNN described above as a function approximator for the deep q-network. The CNN encodes the image into two vectors which are inserted into the q-learning formula. Our model employs two additional techniques- [experience replay](https://arxiv.org/pdf/1902.10948.pdf) and [parameter freezing](https://arxiv.org/pdf/1902.10948.pdf) - to ensure successful integration of the neural net approximator.
+
+## Training
+
+We used the following hyperparameters consistent with the original paper during training.
+
+```python
+############################################################################
+maxiter         = 5000000       # maximum iteration number          
+learning_rate   = 0.00001       # learning rate 
+epsilon_min     = 0.1           # minimum epsilon  
+
+W               = 32            # input matrix size 
+M               = 1000          # memory buffer capacity 
+B               = 10            # parameter theta  update interval                
+C               = 1000          # parameter theta^* update interval ( TargetQ ) 
+Gamma           = 0.99          # discount factor 
+P               = 0             # transaction penalty while training.  0.05 (%) for training, 0 for testing 
+Beta            = 32            # batch size
+############################################################################
+```
+
+Our final model was trained for roughly 8hrs (800k iterations) on the MAGICS Lab cluster.
+
+## Testing
+
+We performed both market neutral portfolio and top/bottom K portfolio experiments from the original paper. The market neutral takes an equivalent long & short position everyday. The top/bottom K experiment only takes positions on the top K and bottom K companies. All test data spanned December 30, 2015 to February 21, 2021.
+
+#### Market Neutral Portfolio Results
+|  Num Companies  |  Annual Return  |  Total Return  |
+|:---------------:|:---------------:|:--------------:|
+|        14       |      20.1%      |     157.0%     |
+
+#### Top/Bottom K Portfolio Results
+| Num Companies | K* | Annual Return | Total Return |
+|:-------------:|:--:|:-------------:|:------------:|
+|       14      |  1 |     83.3%     |    2167.6%   |
+|       14      |  2 |     53.1%     |    796.8%    |
+|       14      |  3 |     30.6%     |    295.1%    |
+|       14      |  4 |     22.9%     |    189.3%    |
+|       14      |  5 |     18.8%     |    142.6%    |
+
+*K represents the number of top/bottom companies used. This differs from the paper where K={5%,10%,20%} represents a percentage of companies in the dataset.
+
+## Evaluation
+
+#### vs US Total Market Returns
+In both experiments, our model outperformed the total US stock market index for the same time period.
+
+| Total US Market | S&P 500 | Market Neutral | Top/Bottom K |
+|:---------------:|:-------:|:--------------:|:------------:|
+|      97.5%      |  93.4%  |     157.0%     |    2167.6%   |
+
+These results show that our deep q-network was able to effectively learn patterns in the price and volume chart data. It was able to apply knowledge from 50 companies in the training dataset to 14 new companies it had never seen before in the test dataset. The market neutral portfolio shows that the model can effectively signal [long, neutral, short] positions while the top/bottom k result shows that the model can also accurately predict the magnitude of a company's future gain/loss.
+
+#### vs Paper Results
+Our model performed similarly to or better than the original paper results.
+
+In the market neutral experiment, the paper returned US annual gains of 20.64% for 2006-2010, 9.39% for 2010-2014, and 4.11% for 2014-2018. As mentioned above, our model returned an annual gain of 20.1% for Dec 2015 through Feb 2021. Since the time interval for our data does not precisely align with the paper’s data time interval we cannot directly compare the annual return values, but our model performs similarly to the best result from the paper for the market neutral test.
+
+In the top/bottom k experiment the paper returned annual returns of 7.22% for 2006-2010, 21.8% for 2010-2014, and 11.25% for 2014-2018 when averaging results for K=[5,10,20]. The top individual result was 73.27% for 2010-2014 with K=5. As shown in the testing section above, our model achieved 83.3%, 53.1%, 30.6%, 22.9%, and 18.8% for K=1,2,3,4,5. Therefore, our results on the tested time interval meet or exceed those reported in the paper.
 
