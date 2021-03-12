@@ -194,7 +194,7 @@ The input to the CNN model is a 32x32 array which represents the normalized pric
 
 The diagram below shows the architecture and inputs of the CNN model. There are four hidden convolutional layers followed by two dense layers. Each convolution is followed by a ReLU and max pooling after the 2nd and 4th conv layers.
 
-<img src="https://github.com/dzane17/stock-market-prediction-CNN-qnetwork/blob/main/src/Images_Readme/cnn_architecture.PNG" width="400" height="400">
+<img src="https://github.com/dzane17/stock-market-prediction-CNN-qnetwork/blob/main/src/Images_Readme/cnn_architecture.png">
 
 #### Deep Q-Network
 Since the input state to the q-learning algorithm is complex (graphical image), we use the CNN described above as a function approximator for the deep q-network. The CNN encodes the image into two vectors which are inserted into the q-learning formula. Our model employs two additional techniques- [experience replay](https://arxiv.org/pdf/1902.10948.pdf) and [parameter freezing](https://arxiv.org/pdf/1902.10948.pdf) - to ensure successful integration of the neural net approximator.
