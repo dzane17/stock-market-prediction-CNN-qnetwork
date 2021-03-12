@@ -9,6 +9,7 @@
 
 
 - Data that we used to train model in this repository is not uploaded due to licensing. 
+- VIDEO PRESENTATION LINK: [YouTube](https://www.youtube.com/)
 
 <!---
 ```python
